@@ -7,22 +7,23 @@ class Company(models.Model):
 
 
 class Costumer(models.Model):
-    user_id = models.CharField(max_length=20, unique=True)
+    user_id = models.CharField(max_length=20, primary_key=True)
     login = models.CharField(max_length=20, unique=True)
+    password = models.CharField(max_length=20, default='')
     name = models.CharField(max_length=50)
-    company = models.ForeignKey(Company)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
 
 class Order(models.Model):
     id = models.IntegerField(primary_key=True)
-    costumer = models.ForeignKey(Costumer)
-    order_name = models.CharField(max_length=20, unique=True)
+    costumer = models.ForeignKey(Costumer, on_delete=models.CASCADE, default='')
+    order_name = models.CharField(max_length=20)
     created_at = models.DateTimeField()
 
 
 class OrderItems(models.Model):
     id = models.IntegerField(primary_key=True)
-    order = models.ForeignKey(Order)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     price_per_unit = models.FloatField()
     quantity = models.IntegerField()
     product = models.CharField(max_length=20)
@@ -30,5 +31,5 @@ class OrderItems(models.Model):
 
 class Delivery(models.Model):
     id = models.IntegerField(primary_key=True)
-    order_item = models.ForeignKey(OrderItems)
+    order_item = models.ForeignKey(OrderItems, on_delete=models.CASCADE)
     delivered_quantity = models.IntegerField()
