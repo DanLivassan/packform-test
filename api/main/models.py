@@ -23,7 +23,7 @@ class Order(models.Model):
 
 class OrderItems(models.Model):
     id = models.IntegerField(primary_key=True)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     price_per_unit = models.FloatField()
     quantity = models.IntegerField()
     product = models.CharField(max_length=20)
@@ -31,5 +31,5 @@ class OrderItems(models.Model):
 
 class Delivery(models.Model):
     id = models.IntegerField(primary_key=True)
-    order_item = models.ForeignKey(OrderItems, on_delete=models.CASCADE)
+    order_item = models.ForeignKey(OrderItems, on_delete=models.CASCADE, related_name='delivered')
     delivered_quantity = models.IntegerField()
