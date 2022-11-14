@@ -1,13 +1,15 @@
 import './App.css';
-import OrderTable from './components/OrderTable';
-import { data } from './data/data';
-import { formatOrder } from './utils/format-order';
+import { OrderPanel } from './components/Order';
+import { ProviderOrder } from './context/orders.context';
+
 
 function App() {
-  const orders = formatOrder(data)
+
   return (
     <div className="App">
-      <OrderTable orders={orders}></OrderTable>
+      <ProviderOrder>
+        <OrderPanel></OrderPanel>
+      </ProviderOrder>
     </div>
   );
 }

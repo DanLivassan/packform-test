@@ -13,6 +13,7 @@ interface IProps {
     orders: Order[]
 }
 const OrderTable = ({ orders }: IProps) => {
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
