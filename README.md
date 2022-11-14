@@ -7,6 +7,8 @@ Unpack the csv file on api/main/management/commands/data
 
 With the virtual env activated run the on backend (at api/ path):
 
+Create a file at *api/app/.env* with the custom content of *api/app/.env.sample*
+
 `./manage.py migrate`
 
 `python manage.py import_data`
@@ -14,5 +16,7 @@ With the virtual env activated run the on backend (at api/ path):
 `./manage.py runserver`
 
 At the frontend path you can run:
+
+`yarn install`
 
 `yarn start`
