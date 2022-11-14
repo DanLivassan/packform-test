@@ -6,6 +6,7 @@ export const OrderContext = createContext<any>(undefined);
 
 export const useOrderProvider = () => {
   const [orders, setOrders] = useState<Order[]>([])
+  const [totalAmount, setTotalAmount] = useState(0)
   useEffect(() => {
     const fetchData = async () => {
       const orders = await getAll()
@@ -13,9 +14,18 @@ export const useOrderProvider = () => {
     }
     fetchData()
   }, [])
+  useEffect(() => {
+
+    let tAmount = 0
+    orders.forEach(order => {
+      tAmount += order.totalAmount
+    })
+    setTotalAmount(tAmount)
+  }, [orders])
   return {
     orders,
     setOrders,
+    totalAmount
   };
 };
 
