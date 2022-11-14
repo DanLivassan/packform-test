@@ -1,4 +1,4 @@
-import { data } from "../data/data";
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,18 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-interface Order {
-    orderName: string;
-    customerCompanyName: string;
-    customerName: string;
-    orderDate: string;
-    deliveredAmount: number;
-    totalAmount: number
+import { Order } from '../utils/format-order';
+
+
+interface IProps {
+    orders: Order[]
 }
-
-
-
-export default function OrderTable() {
+const OrderTable = ({ orders }: IProps) => {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -27,20 +22,24 @@ export default function OrderTable() {
                         <TableCell align="right">Company name</TableCell>
                         <TableCell align="right">Costumer Name</TableCell>
                         <TableCell align="right">Order date</TableCell>
+                        <TableCell align="right">Total Amount</TableCell>
+                        <TableCell align="right">Delivered Amount</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.results.map((row) => (
+                    {orders.map((row, id) => (
                         <TableRow
-                            key={row.id}
+                            key={id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {row.order_name}
+                                {row.orderName}
                             </TableCell>
-                            <TableCell align="right">{row.costumer.company.name}</TableCell>
-                            <TableCell align="right">{row.costumer.name}</TableCell>
-                            <TableCell align="right">{row.created_at}</TableCell>
+                            <TableCell align="right">{row.customerCompanyName}</TableCell>
+                            <TableCell align="right">{row.customerName}</TableCell>
+                            <TableCell align="right">{row.orderDate}</TableCell>
+                            <TableCell align="right">{Math.round(row.totalAmount * 100) / 100}</TableCell>
+                            <TableCell align="right">{row.deliveredAmount ? row.deliveredAmount : '-'}</TableCell>
 
                         </TableRow>
                     ))}
@@ -49,3 +48,5 @@ export default function OrderTable() {
         </TableContainer>
     );
 }
+
+export default OrderTable
