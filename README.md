@@ -10,3 +10,9 @@ With the virtual env activated run the on backend (at api/ path):
 `./manage.py migrate`
 
 `python manage.py import_data`
+
+`./manage.py runserver`
+
+At the frontend path you can run:
+
+`yarn start`
